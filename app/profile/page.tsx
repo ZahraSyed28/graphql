@@ -148,8 +148,7 @@ export default function ProfilePage() {
     const fetchProfile = async () => {
       const jwt = localStorage.getItem("jwt");
       if (!jwt) {
-        setError("Please log in first.");
-        return;
+        router.push("/login");
       }
 
       try {

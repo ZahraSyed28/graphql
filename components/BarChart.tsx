@@ -1,5 +1,10 @@
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
-import ReactApexChart from "react-apexcharts";
+
+// Dynamically import ReactApexChart with SSR disabled
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 interface BarChartProps {
   totalUp: number;

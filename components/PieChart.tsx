@@ -1,7 +1,10 @@
-/** @format */
-
+import dynamic from "next/dynamic";
 import React from "react";
-import ReactApexChart from "react-apexcharts";
+
+// Dynamically import ReactApexChart with SSR disabled
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 interface PieChartProps {
   transactions: {
