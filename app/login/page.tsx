@@ -61,8 +61,12 @@ const LoginPage = () => {
         localStorage.setItem("jwt", jwt);
         console.log("JWT successfully saved:", jwt);
         router.push("/profile");
-      } catch (err) {
-        setError("Invalid username or password.");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }      
       }
     }
   };

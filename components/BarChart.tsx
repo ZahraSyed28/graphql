@@ -12,7 +12,6 @@ interface BarChartProps {
 }
 
 const BarChart: React.FC<BarChartProps> = ({ totalUp, totalDown }) => {
-  const type: "bar" = "bar"; // Example of strong typing
 
   const formatSize = (size: number) => {
     if (size >= 1000000) {
@@ -34,7 +33,7 @@ const BarChart: React.FC<BarChartProps> = ({ totalUp, totalDown }) => {
     ],
     options: {
       chart: {
-        type, // Explicitly set to the correct type
+        type: "bar" as const, // Explicitly set to the correct type
         height: 200,
       },
       plotOptions: {
@@ -51,7 +50,7 @@ const BarChart: React.FC<BarChartProps> = ({ totalUp, totalDown }) => {
       },
       title: {
         text: "Audit Done and Received  ",
-        align: "center" as "center",
+        align: "center" as const,
         style: {
           fontSize: "16px",
         },

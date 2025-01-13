@@ -13,7 +13,7 @@ interface ColumnChartProps {
 }
 
 const ColumnChart: React.FC<ColumnChartProps> = ({ levels, totals, tooltips }) => {
-  const type: "bar" = "bar"; // Explicitly specify the chart type as a bar
+  const type = "bar" as const; // Explicitly specify the chart type as a bar
 
   const options = {
     chart: {
@@ -21,9 +21,11 @@ const ColumnChart: React.FC<ColumnChartProps> = ({ levels, totals, tooltips }) =
       type,
       toolbar: { show: false },
       events: {
-        dataPointMouseEnter: (event: any, chartContext: any, { dataPointIndex }: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        dataPointMouseEnter: (event: any) => {
           event.target.style.cursor = "pointer";
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         dataPointClick: (event: any, chartContext: any, { dataPointIndex }: any) => {
           alert(tooltips[dataPointIndex]);
         },
@@ -39,7 +41,8 @@ const ColumnChart: React.FC<ColumnChartProps> = ({ levels, totals, tooltips }) =
     },
     tooltip: {
       enabled: true,
-      custom: ({ series, seriesIndex, dataPointIndex }: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        custom: ({ dataPointIndex }: any) => {
         return `<div style="padding:10px; font-size:14px;">
                   ${tooltips[dataPointIndex]}
                 </div>`;
@@ -69,7 +72,7 @@ const ColumnChart: React.FC<ColumnChartProps> = ({ levels, totals, tooltips }) =
     },
     title: {
       text: "Students per Level ",
-      align: "center" as "center",
+      align: "center" as const,
       style: {
         fontSize: "16px",
       },

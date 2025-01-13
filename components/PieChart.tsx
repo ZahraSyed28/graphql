@@ -41,7 +41,7 @@ const PolarAreaChart: React.FC<PieChartProps> = ({ transactions }) => {
 
   const chartOptions = {
     chart: {
-      type: "polarArea" as "polarArea",
+      type: "polarArea" as const,
     },
     stroke: {
       colors: ["#fff"],
@@ -65,7 +65,7 @@ const PolarAreaChart: React.FC<PieChartProps> = ({ transactions }) => {
     labels: categories,
     title: {
       text: "Here are your skills with the highest completion rate among all categories",
-      align: "center" as "center",
+      align: "center" as const,
     },
   };
 

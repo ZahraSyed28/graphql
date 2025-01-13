@@ -185,8 +185,12 @@ export default function ProfilePage() {
         console.log("My data is ", result.data.user[0]);
         console.log("EventData: ", result.data.event_user);
         console.log("Transaction Data: ", result.data.transaction);
-      } catch (err: any) {
-        setError(err.message || "An error occurred");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }      
       }
     };
 
