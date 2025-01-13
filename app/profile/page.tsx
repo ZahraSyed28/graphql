@@ -197,6 +197,20 @@ export default function ProfilePage() {
     fetchProfile();
   }, []);
 
+  const enrolledEventIds = eventUserData.filter((event) => event.userLogin === userData?.login)
+  .map((event) => event.eventId);
+  console.log(enrolledEventIds);
+
+  const cohort= eventIdToCohort[Number(enrolledEventIds)]
+
+  const skillTransactions = transactionData.filter((transaction) =>
+    transaction.type.toLowerCase().includes("level") &&
+    transaction.path.toLowerCase().includes("/bahrain/bh-module/") && 
+    transaction.eventId === enrolledEventIds[0]
+  );
+  
+  console.log("Level: ",String(skillTransactions.length));
+
   if (error) return <p style={{ color: "red" }}>{error}</p>;
   if (!userData || !eventUserData) return <p>Loading the data...</p>;
 
@@ -256,6 +270,18 @@ export default function ProfilePage() {
             <span className="text-gray-600">
               {userData.totalDown}
               {" Bytes"}
+            </span>
+          </p>
+          <p className="text-gray-800 mb-3">
+            <span className="font-semibold">Level Reached:</span>{" "}
+            <span className="text-gray-600">
+              {String(skillTransactions.length)}
+            </span>
+          </p>
+          <p className="text-gray-800 mb-3">
+            <span className="font-semibold">Cohort:</span>{" "}
+            <span className="text-gray-600">
+              {cohort}
             </span>
           </p>
         </div>
